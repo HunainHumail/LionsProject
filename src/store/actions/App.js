@@ -24,6 +24,14 @@ export default class Action {
     static ANNIVERSARY_API = 'ANNIVERSARY_API'
     static ANNIVERSARY_API_SUCCESS = 'ANNIVERSARY_API_SUCCESS'
     static ANNIVERSARY_API_FAIL = 'ANNIVERSARY_API_FAIL'
+    
+    static GET_NOTICE_API = 'GET_NOTICE_API'
+    static GET_NOTICE_API_SUCCESS = 'GET_NOTICE_API_SUCCESS'
+    static GET_NOTICE_API_FAIL = 'GET_NOTICE_API_FAIL'
+
+    static GET_SERVICES_API = 'GET_SERVICES_API'
+    static GET_SERVICES_API_SUCCESS = 'GET_SERVICES_API_SUCCESS'
+    static GET_SERVICES_API_FAIL = 'GET_SERVICES_API_FAIL'
   
 
   
@@ -64,6 +72,20 @@ export default class Action {
     static getAnniversary() {
       return {
         type: Action.ANNIVERSARY_API,
+      };
+    }
+
+    static getNotice(payload) {
+      return {
+        type: Action.GET_NOTICE_API,
+        payload
+      };
+    }
+
+    static getServices(payload) {
+      return {
+        type: Action.GET_SERVICES_API,
+        payload
       };
     }
   }

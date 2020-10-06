@@ -147,3 +147,48 @@ export function* getAnniversary(action) {
   }
 
 }
+
+
+export function* getNotice(action) {
+  console.log('SAGA RUN', action.payload)
+  let formData = new FormData();
+  formData.append('notice_type', action.payload);
+  const response = yield ApiCaller.Post('upcoming_notice', formData);
+  console.log(response.data, 'NOTICESSSSSSSSS');
+
+  if (response){
+    if(response.status == 200){
+      yield put({type:AppActions.GET_NOTICE_API_SUCCESS, payload:response.data})
+    }else if(response.status == 400){
+      yield put({type:AppActions.GET_NOTICE_API_FAIL});
+      // showToast(response.data)
+      console.log(response)
+    }
+  }else{
+    yield put({type:AppActions.GET_NOTICE_API_FAIL});
+    showToast("Something went wrong")
+  }
+
+}
+
+export function* getServices(action) {
+  console.log('SAGA RUN', action.payload)
+  let formData = new FormData();
+  formData.append('service_type', action.payload);
+  const response = yield ApiCaller.Post('services', formData);
+  console.log(response.data, 'SERVICES');
+
+  if (response){
+    if(response.status == 200){
+      yield put({type:AppActions.GET_SERVICES_API_SUCCESS, payload:response.data})
+    }else if(response.status == 400){
+      yield put({type:AppActions.GET_SERVICES_API_FAIL});
+      // showToast(response.data)
+      console.log(response)
+    }
+  }else{
+    yield put({type:AppActions.GET_SERVICES_API_FAIL});
+    showToast("Something went wrong")
+  }
+
+}

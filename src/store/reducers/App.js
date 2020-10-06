@@ -10,7 +10,9 @@ const INITIAL_STATE = {
   birthdayData: [],
   anniversaryData: [],
   birthdates: [],
-  anniversaryDates: []
+  anniversaryDates: [],
+  noticeData: [],
+  servicesData: [],
 };
 
 function Reducer(state = INITIAL_STATE, action) {
@@ -47,31 +49,56 @@ function Reducer(state = INITIAL_STATE, action) {
       // console.log('BIRTHDAY API CONSOLE RUNNING')
       return {...state, isLoading: true};
     case AppActions.BIRTHDAY_API_SUCCESS:
-      console.log('API SUCCESS DATA: ', action)
+      console.log('API SUCCESS DATA: ', action);
       // const dobs = action.payload.map((val, index) => {
       //   let monthDate = '2020' + val.dob.substr(4);
       //   return [...state.birthdayData, monthDate];
       // });
       // console.log('DOBSSSSSS', ...dobs);
-      let dobArray =[];
+      let dobArray = [];
       var year = moment().format('YYYY');
       const dob = action.payload.map((item) => {
-        dobArray.push(year+item.dob.substring(4))
-      })
-      return {...state, isLoading: false, birthdayData: action.payload, birthdates: dobArray};
+        dobArray.push(year + item.dob.substring(4));
+      });
+      return {
+        ...state,
+        isLoading: false,
+        birthdayData: action.payload,
+        birthdates: dobArray,
+      };
     case AppActions.BIRTHDAY_API_FAIL:
       return {...state, isLoading: false};
 
     case AppActions.ANNIVERSARY_API:
       return {...state, isLoading: true};
     case AppActions.ANNIVERSARY_API_SUCCESS:
-      let dobArray2 =[];
+      let dobArray2 = [];
       var year = moment().format('YYYY');
       const dob2 = action.payload.map((item) => {
-        dobArray2.push(year+item.anniversary_date.substring(4))
-      })
-      return {...state, isLoading: false, anniversaryData: action.payload, anniversaryDates: dobArray2};
+        dobArray2.push(year + item.anniversary_date.substring(4));
+      });
+      return {
+        ...state,
+        isLoading: false,
+        anniversaryData: action.payload,
+        anniversaryDates: dobArray2,
+      };
     case AppActions.ANNIVERSARY_API_FAIL:
+      return {...state, isLoading: false};
+
+    case AppActions.GET_NOTICE_API:
+      return {...state, isLoading: true};
+    case AppActions.GET_NOTICE_API_SUCCESS:
+      let data = action.payload;
+      return {...state, isLoading: false, noticeData: data};
+    case AppActions.GET_NOTICE_API_FAIL:
+      return {...state, isLoading: false};
+
+    case AppActions.GET_SERVICES_API:
+      return {...state, isLoading: true};
+    case AppActions.GET_SERVICES_API_SUCCESS:
+      return {...state, isLoading: false, servicesData: action.payload};
+    case AppActions.GET_SERVICES_API_FAIL:
       return {...state, isLoading: false};
     default:
       return state;

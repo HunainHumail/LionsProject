@@ -119,7 +119,7 @@ export default class DashboardScreen extends Component {
           <View style={{marginHorizontal: 20, flexDirection: 'row'}}>
             <View style={{flex: 1, height: 120, width: '50%'}}>
               <TouchableOpacity
-                onPress={() => NavigationService.navigate('Profile')}>
+                onPress={() => NavigationService.navigate('Service')}>
                 <Image
                   source={require('../../assets/Service-Activities.png')}
                   style={{width: 125, height: 125, alignSelf: 'center'}}
