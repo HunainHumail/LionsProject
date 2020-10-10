@@ -3,7 +3,7 @@ import moment from 'moment';
 
 const INITIAL_STATE = {
   clubHistory: '',
-  isLoading: false,
+  isLoading: true,
   presidentMessage: '',
   clubPdg: '',
   memberDetails: [],
@@ -100,6 +100,14 @@ function Reducer(state = INITIAL_STATE, action) {
       return {...state, isLoading: false, servicesData: action.payload};
     case AppActions.GET_SERVICES_API_FAIL:
       return {...state, isLoading: false};
+
+    case AppActions.BLOOD_DONATION_DETAILS_UPDATE:
+      return {...state, isLoading: true};
+    case AppActions.BLOOD_DONATION_DETAILS_UPDATE_SUCCESS:
+      return {...state, isLoading: false};
+    case AppActions.BLOOD_DONATION_DETAILS_UPDATE_FAIL:
+      return {...state, isLoading: false};
+
     default:
       return state;
   }

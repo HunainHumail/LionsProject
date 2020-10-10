@@ -13,6 +13,7 @@ import Service from './Service';
 import ForgotPassword from './ForgotPassword';
 import OptVerify from './OptVerify';
 import BusinessCorner from './BusinessCorner';
+import NavDrawer from './NavDrawer';
 
 export {
   SplashScreen,
@@ -29,5 +30,6 @@ export {
   Service,
   ForgotPassword,
   OptVerify,
-  BusinessCorner
+  BusinessCorner,
+  NavDrawer
 };

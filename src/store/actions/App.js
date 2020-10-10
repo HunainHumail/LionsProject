@@ -32,6 +32,10 @@ export default class Action {
     static GET_SERVICES_API = 'GET_SERVICES_API'
     static GET_SERVICES_API_SUCCESS = 'GET_SERVICES_API_SUCCESS'
     static GET_SERVICES_API_FAIL = 'GET_SERVICES_API_FAIL'
+
+    static BLOOD_DONATION_DETAILS_UPDATE = 'BLOOD_DONATION_DETAILS_UPDATE'
+    static BLOOD_DONATION_DETAILS_UPDATE_SUCCESS = 'BLOOD_DONATION_DETAILS_UPDATE_SUCCESS'
+    static BLOOD_DONATION_DETAILS_UPDATE_FAIL = 'BLOOD_DONATION_DETAILS_UPDATE_FAIL'
   
 
   
@@ -85,6 +89,13 @@ export default class Action {
     static getServices(payload) {
       return {
         type: Action.GET_SERVICES_API,
+        payload
+      };
+    }
+
+    static bloodDonationUpdate(payload) {
+      return {
+        type: Action.BLOOD_DONATION_DETAILS_UPDATE,
         payload
       };
     }

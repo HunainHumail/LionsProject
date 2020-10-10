@@ -1,9 +1,11 @@
 import {put, call, select, delay} from 'redux-saga/effects';
 import {AuthActions, HomeActions, AppActions} from '../actions';
-import {showToast} from '../../config/utills';
+// import {showToast} from '../../config/utills';
 import {NavigationService} from '../../config';
 import {ApiCaller} from '../../config';
 import AsyncStorage from '@react-native-community/async-storage';
+import {validateEmail, showToast} from '../../config/utills';
+
 
 // export const getUser = state => state.Auth.user;
 
@@ -189,6 +191,33 @@ export function* getServices(action) {
   }else{
     yield put({type:AppActions.GET_SERVICES_API_FAIL});
     showToast("Something went wrong")
+  }
+
+}
+
+export function* bloodDonationUpdate(action) {
+  console.log('SAGA RUN', action.payload)
+  let formData = new FormData();
+  formData.append('last_donate_date', action.payload.date);
+  formData.append('user_id', action.payload.id);
+  console.log('FORM DATA LOG:', formData)
+
+  const response = yield ApiCaller.Post('update_user_blood_donation', formData);
+  console.log(response.data, 'BLOOD DONATION');
+
+  if (response) {
+    if (response.data.message == 'success'){
+      yield put({type:AppActions.BLOOD_DONATION_DETAILS_UPDATE_SUCCESS});
+      console.log('SUCCESS')
+  
+    }else{
+      yield put({type:AppActions.BLOOD_DONATION_DETAILS_UPDATE_FAIL});
+      console.log('FAIL')
+    }
+  }
+  else {
+    yield put({type:AppActions.BLOOD_DONATION_DETAILS_UPDATE_FAIL});
+    console.log('FAIL')
   }
 
 }

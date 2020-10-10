@@ -8,7 +8,8 @@ import {
   Anniversaries,
   BloodDoner,
   Notices,
-  Profile
+  Profile,
+  NavDrawer,
 } from '../components';
 
 // export const HomeStack = [
@@ -64,7 +65,6 @@ import {
 //   },
 // ];
 
-
 const HomeStack = {
   DashboardScreen: {
     screen: DashboardScreen,
@@ -95,6 +95,9 @@ const HomeStack = {
   },
   Profile: {
     screen: Profile,
+  },
+  NavDrawer: {
+    screen: NavDrawer,
   },
 };
 

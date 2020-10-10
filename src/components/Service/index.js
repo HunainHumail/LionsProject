@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from 'react-native';
-import {Fonts, Metrix} from '../../config';
+import {Fonts, Images, Metrix} from '../../config';
 import Header from '../Common/header';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import {connect} from 'react-redux';
@@ -57,57 +57,40 @@ class Services extends Component {
       this.setState({
         tabSelect: 'Permanent Project',
       });
+      console.log('PERMANENT');
       this.props.getServices('permanent');
     } else if (switchIndex == 1) {
       this.setState({
         tabSelect: 'Service Activities',
       });
+      console.log('ACTIVITIES');
       this.props.getServices('activities');
     } else if (switchIndex == 2) {
       this.setState({
         tabSelect: 'Fellowship',
       });
+      console.log('FELLOWSHIP');
       this.props.getServices('fellowship');
     }
   }
 
-  sampleData = [
-    {
-      notice_type: 'generalMeeting',
-      notice_title: 'All Member Present',
-      notice_desc:
-        "Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-
-      notice_date: '2020-09-25',
-      is_active: 'Y',
-    },
-    {
-      notice_type: 'generalMeeting',
-      notice_title: 'Library Formation',
-      notice_desc:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-
-      notice_date: '2020-10-14',
-      is_active: 'Y',
-    },
-    {
-      notice_type: 'upcomingMeeting',
-      notice_title: 'Test Upcoming Meeting',
-      notice_desc:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-
-      notice_date: '2020-10-14',
-      is_active: 'Y',
-    },
-  ];
+  
   render() {
     const {isLoading, servicesData} = this.props;
-    console.log('NOTICE DATA CONSOLE:', servicesData);
+    console.log('service DATA CONSOLE:', servicesData);
+    console.log('IS LOADING:', isLoading)
+    // console.log('service DATA CONSOLE:', servicesData[0].service_type);
+
     return (
       <View>
         <StatusBar backgroundColor="#335393" barStyle="light-content" />
         <Header navigation={this.props.navigation} />
-        <View>
+        {
+          isLoading ? (
+            <ActivityIndicator color={'red'} />
+
+          ) : (
+            <View>
           <Text
             style={{
               marginTop: 10,
@@ -162,25 +145,88 @@ class Services extends Component {
             )}
             keyExtractor={(item, index) => index.toString()}
           />
-          {isLoading ? (
-            <View
-              style={{
-                position: 'absolute',
-                top: 0,
-                bottom: 0,
-                right: 0,
-                left: 0,
-                justifyContent: 'center',
-                alignItems: 'center',
-                zIndex: 1,
-                backgroundColor: 'transparent',
-              }}>
-              <ActivityIndicator size={50} animating={true} color="red" />
+          {
+          // isLoading ? (
+          //   <View
+          //     style={{
+          //       position: 'absolute',
+          //       top: 0,
+          //       bottom: 0,
+          //       right: 0,
+          //       left: 0,
+          //       justifyContent: 'center',
+          //       alignItems: 'center',
+          //       zIndex: 1,
+          //       backgroundColor: 'transparent',
+          //     }}>
+          //     <ActivityIndicator size={50} animating={true} color="red" />
+          //   </View>
+          // ) : 
+          servicesData[0].service_type == 'permanent' ? (
+            <View>
+              <FlatList
+                data={servicesData}
+                renderItem={({item, index}) => {
+                  return (
+                    <View>
+                      <Image
+                        source={item.service_image}
+                        style={{
+                          height: Metrix.VerticalSize(163),
+                          width: Metrix.HorizontalSize(346),
+                          borderRadius: 9,
+                          backgroundColor: 'white',
+                          alignSelf: 'center',
+                          marginTop: Metrix.VerticalSize(17),
+                        }}
+                      />
+                      <Text
+                        style={{
+                          marginTop: 10,
+                          fontSize: Metrix.customFontSize(14),
+                          fontWeight: '700',
+                          color: '#00529C',
+                          marginLeft: Metrix.HorizontalSize(23),
+                        }}>
+                        {item.service_title}
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          marginLeft: Metrix.HorizontalSize(23),
+                          marginTop: Metrix.VerticalSize(10),
+                        }}>
+                        <Icons
+                          name="event"
+                          color="#FF6969"
+                          size={Metrix.VerticalSize(13)}
+                        />
+                        <Text
+                          style={{
+                            color: '#5D5D5D',
+                            fontSize: Metrix.customFontSize(11),
+                          }}>
+                          {'15 SEP 2020'}
+                        </Text>
+                      </View>
+                      <Text
+                        style={{
+                          color: '#5D5D5D',
+                          fontSize: Metrix.customFontSize(11),
+                          marginTop: Metrix.VerticalSize(10),
+                          marginHorizontal: Metrix.HorizontalSize(23),
+                        }}>
+                        {item.service_desc}
+                      </Text>
+                    </View>
+                  );
+                }}
+              />
             </View>
           ) : (
             <View>
               <FlatList
-                data={this.sampleData}
+                data={servicesData}
                 renderItem={({item, index}) => {
                   return (
                     <View
@@ -194,7 +240,7 @@ class Services extends Component {
                           fontWeight: '700',
                           color: '#00529C',
                         }}>
-                        {item.notice_title}
+                        {item.service_title}
                       </Text>
                       <View
                         style={{
@@ -223,7 +269,7 @@ class Services extends Component {
                             color: '#5D5D5D',
                             fontSize: Metrix.customFontSize(11),
                           }}>
-                          {item.notice_date}
+                          {'15 SEP 2020'}
                         </Text>
                       </View>
                       <Text
@@ -231,7 +277,7 @@ class Services extends Component {
                           color: '#5D5D5D',
                           fontSize: Metrix.customFontSize(11),
                         }}>
-                        {item.notice_desc}
+                        {item.service_desc}
                       </Text>
                       <View
                         style={{
@@ -245,8 +291,11 @@ class Services extends Component {
                 }}
               />
             </View>
-          )}
+          )
+          }
         </View>
+          )
+        }
       </View>
     );
   }

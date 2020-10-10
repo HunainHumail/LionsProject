@@ -6,7 +6,7 @@ import {AppActions, AuthActions, ProfileActions} from '../actions/';
 
 // Imports: Redux Sagas
 
-import {getClubHistory, getClubPdg, getPresidentMessage, getMemberDetails, getBirthday, getAnniversary, getNotice, getServices} from './AppSaga';
+import {getClubHistory, getClubPdg, getPresidentMessage, getMemberDetails, getBirthday, getAnniversary, getNotice, getServices, bloodDonationUpdate} from './AppSaga';
 import {login} from './AuthSaga';
 import {userDetails, updateUserDetails} from './ProfileSaga';
 // Redux Saga: Root Saga
@@ -23,6 +23,8 @@ export function* rootSaga() {
     takeEvery(AppActions.BIRTHDAY_API, getBirthday),
     takeEvery(AppActions.ANNIVERSARY_API, getAnniversary),
     takeEvery(AppActions.GET_NOTICE_API, getNotice),
-    takeEvery(AppActions.GET_SERVICES_API, getServices)
+    takeEvery(AppActions.GET_SERVICES_API, getServices),
+    takeEvery(AppActions.BLOOD_DONATION_DETAILS_UPDATE, bloodDonationUpdate)
+
   ]);
 }

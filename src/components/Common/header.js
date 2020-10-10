@@ -17,6 +17,9 @@ export default class Header extends Component {
     console.log('FUNCTION RUN 2')
 
   }
+  navigateToUserTab = () => {
+    NavigationService.navigate('NavDrawer', {transition: 'SlideFromLeft'});
+  };
 
   render() {
     console.log("PROPSSSS HEADER:", this.props)
@@ -24,7 +27,7 @@ export default class Header extends Component {
         <View style={{height:60,width:"100%",backgroundColor:'#4267B2',flexDirection:"row",justifyContent:"space-between"}}>
         <View style={{width:'10%'}}>
         <TouchableOpacity
-            // onPress={() =>     this.props.navigation.toggleDrawer()
+            onPress={() =>     this.navigateToUserTab()}
             // }
             // onPress={() => NavigationService.toggleDrawer('DrawerNavigation')}
           >

@@ -63,35 +63,6 @@ class Notice extends Component {
     }
   }
 
-  sampleData = [
-    {
-      notice_type: 'generalMeeting',
-      notice_title: 'All Member Present',
-      notice_desc:
-        "Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-
-      notice_date: '2020-09-25',
-      is_active: 'Y',
-    },
-    {
-      notice_type: 'generalMeeting',
-      notice_title: 'Library Formation',
-      notice_desc:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-
-      notice_date: '2020-10-14',
-      is_active: 'Y',
-    },
-    {
-      notice_type: 'upcomingMeeting',
-      notice_title: 'Test Upcoming Meeting',
-      notice_desc:
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-
-      notice_date: '2020-10-14',
-      is_active: 'Y',
-    },
-  ];
   render() {
     const {isLoading, noticeData} = this.props;
     console.log('NOTICE DATA CONSOLE:', noticeData);

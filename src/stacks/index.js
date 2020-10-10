@@ -4,6 +4,8 @@ import InitialStack from './InitialStack';
 import AuthStack from './AuthStack';
 import HomeStack from './HomeStack';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {Transition} from '../config';
+
 
 // import {DrawerStack} from './DrawerNavigator';
 // import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -18,6 +20,9 @@ const MainStack = createStackNavigator(
     headerMode: 'none',
     // initialRouteName: 'FindGolferScreen',
   },
+  {
+    transitionConfig: Transition
+  }
 );
 
 export default createAppContainer(MainStack);

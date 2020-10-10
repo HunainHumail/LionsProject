@@ -8,16 +8,21 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
+  ActivityIndicator
 } from 'react-native';
 import Header from '../Common/header';
 import {NavigationService} from '../../config';
+import {connect} from 'react-redux';
+import {AppActions} from '../../store/actions';
+
 // import {DrawerActions } from 'react-navigation-drawer'
 
 
-export default class DashboardScreen extends Component {
+class DashboardScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.props.getMemberDetails();
 
     // console.log('PROPSSSSSSSSSSSSSSSSSS',this.props.navigation.dispatch(DrawerActions.toggleDrawer))
   }
@@ -29,15 +34,33 @@ export default class DashboardScreen extends Component {
 
   // }
 
+
   render() {
     console.log('PRPOSSS', this.props);
+    let {isLoading} = this.props;
     return (
       <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
         <StatusBar backgroundColor="#4267B2" barStyle="light-content" />
 
         <Header navigation={this.props.navigation} />
 
-        <ScrollView
+        {isLoading ? (
+          <View
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              right: 0,
+              left: 0,
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 1,
+              backgroundColor: 'transparent',
+            }}>
+            <ActivityIndicator size={50} animating={true} color="red" />
+          </View>
+        ):(
+          <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{flexGrow: 1}}>
           <View>
@@ -261,7 +284,23 @@ export default class DashboardScreen extends Component {
             </View>
           </View>
         </ScrollView>
+        )}
       </View>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.App.isLoading,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDetails: (payload) =>
+      dispatch(AppActions.bloodDonationUpdate(payload)),
+    getMemberDetails: (payload) =>
+      dispatch(AppActions.getMemberDetails(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen);
