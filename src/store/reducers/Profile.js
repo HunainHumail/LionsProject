@@ -1,7 +1,7 @@
 import {ProfileActions} from '../actions/';
 const INITIAL_STATE = {
   user_details: {},
-  isLoading: false,
+  isLoading: true,
 };
 
 function Reducer(state = INITIAL_STATE, action) {

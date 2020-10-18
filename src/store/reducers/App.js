@@ -4,6 +4,7 @@ import moment from 'moment';
 const INITIAL_STATE = {
   clubHistory: '',
   isLoading: true,
+  isLoadingService: true,
   presidentMessage: '',
   clubPdg: '',
   memberDetails: [],
@@ -95,11 +96,11 @@ function Reducer(state = INITIAL_STATE, action) {
       return {...state, isLoading: false};
 
     case AppActions.GET_SERVICES_API:
-      return {...state, isLoading: true};
+      return {...state, isLoadingService: true};
     case AppActions.GET_SERVICES_API_SUCCESS:
-      return {...state, isLoading: false, servicesData: action.payload};
+      return {...state, isLoadingService: false, servicesData: action.payload};
     case AppActions.GET_SERVICES_API_FAIL:
-      return {...state, isLoading: false};
+      return {...state, isLoadingService: false};
 
     case AppActions.BLOOD_DONATION_DETAILS_UPDATE:
       return {...state, isLoading: true};

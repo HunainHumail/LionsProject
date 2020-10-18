@@ -303,7 +303,7 @@ class Services extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.App.isLoading,
+    isLoading: state.App.isLoadingService,
     servicesData: state.App.servicesData,
   };
 };

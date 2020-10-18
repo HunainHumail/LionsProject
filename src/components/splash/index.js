@@ -19,7 +19,7 @@ import {connect} from 'react-redux';
       if (user_details) {
         let parsedData = JSON.parse(user_details);
         this.props.loginSuccess(parsedData)
-        NavigationService.reset_0('DashboardScreen');
+        NavigationService.reset_0('DashboardScreen', {user_details: user_details});
       } else {
         setTimeout(() => {
           NavigationService.replace('LoginScreen');
